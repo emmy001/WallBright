@@ -1,0 +1,296 @@
+/* Header Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+.bac{
+   background-color: rgba(18, 25, 39, 1);
+    position:relative;
+}
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: rgba(18, 25, 39, 1);
+  color: #fff;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.company-info h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+}
+.nav-links li a:hover {
+  color: rgba(50, 213, 131, 1);
+}
+.search-bar input {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.icons span {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.profile-name {
+  margin-right: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 120px;
+  padding: 10px;
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.dropdown-menu a:hover {
+  background-color: #555;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+/*//*/
+.profile-section {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-bottom: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.welcome-message {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.profile-pic img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.greeting p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.filters {
+  margin-left: auto;
+}
+
+.filter {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.filter label {
+  margin-right: 5px;
+}
+
+/*///*/
+/* Attendance Summary */
+.attendance-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  margin-top: -10px; /* Overlap with the previous section */
+  /*position: absolute;*/
+}
+
+.attendance-container {
+  text-align: left;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+.attendance-container i {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.attendance-container .label {
+  font-weight: bold;
+}
+
+.attendance-container .count {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Two-Column Section */
+.two-column-section {
+  display: flex;
+  justify-content: center; /* Center columns horizontally */
+  align-items: flex-start; /* Align items to the top */
+  /*width: 1400px;  Fixed width for the section */
+  /*height: 700px;  Fixed height for the section */
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  margin: 20px 10px;
+  /*margin-bottom: 20px;*/
+}
+.bar-graph,
+.pie-chart {
+    width: 100%; /* Make sure charts fill their containers */
+    height: 100%; /* Make sure charts fill their containers */
+}
+
+.wider {
+  flex: 2; /* This column will be wider */
+}
+
+/* Three-Column Section */
+.three-column-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the top */
+  /*width: 1420px;  Fixed width for the section */
+  /*height: 1000px;  Fixed height for the section */
+}
+
+.column {
+  flex: 1;
+  padding: 20px;
+}
+.two-column-section, .three-column-section {
+  margin-top: 5px; /* Adjust this value as needed */
+  margin-bottom: 5px; /* Adjust this value as needed */
+}
+
+/*Bubble Chart*/
+.v434_1089 {
+  width: 400px;
+  height: 301px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  /*top: 0px;*/
+  /*left: 0px;*/
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.v434_1090 {
+  width: 175px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  /*top: 18px;*/
+  /*left: 45px;*/
+  font-family: Inter;
+  font-weight: Semi Bold;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
+}
+
+.v469_1073, .v469_1074 {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.v469_1073 {
+  background: rgba(72,246,158,1);
+  top: 11px;
+  left: -14px;
+}
+
+.v469_1074 {
+  background: rgba(0,0,0,1);
+  top: -110px;
+  left: 104px;
+}
+
+.bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.bubble:hover {
+  transform: scale(1.1);
+}
+
+.percentage {
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.chart-container {
+  width: 100%; /* Make sure the chart container fills its parent */
+  height: 100%; /* Make sure the chart container fills its parent */
+}

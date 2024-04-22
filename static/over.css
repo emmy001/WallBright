@@ -1,0 +1,94 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+}
+
+.bubble-chart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.bubble {
+  width: var(--size, 100px);
+  height: var(--size, 100px);
+  border-radius: 50%;
+  text-align: center;
+  line-height: var(--size, 100px);
+  background-color: rgba(52, 152, 219, 0.8); /* Blue color */
+  color: white;
+  cursor: pointer;
+}
+
+.female {
+  background-color: rgba(231, 76, 60, 0.8); /* Red color */
+}
+
+.bubble span {
+  position: relative;
+  z-index: 1;
+}
+
+.percentage {
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.key {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.key div {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.key div:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.male-key:before {
+  background-color: rgba(52, 152, 219, 0.8); /* Blue color */
+}
+
+.female-key:before {
+  background-color: rgba(231, 76, 60, 0.8); /* Red color */
+}
+
+/* Hover effect */
+.bubble:hover {
+  transform: scale(1.1);
+}
+
+.bubble:hover .percentage {
+  display: block;
+}

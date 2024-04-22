@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WallBright Schools</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit-pro.min.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<section class="bac">
+<header class="main-header">
+  <div class="logo">
+    <img src="{{ url_for('static', filename='globe1.png') }}" alt="Company Logo">
+
+  </div>
+    <h4>WALLBRIGHT SCHOOLS</h4>
+  <div class="company-info">
+    <ul class="nav-links">
+    <li><a href="wall.html">Overview</a></li>
+      <li><a href="studentlist.html">Student's List</a></li>
+      <li><a href="manage_attendance.html">Manage Attendance</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><div class="search-bar"><input type="text" placeholder="Search..."></div></li>
+      <li><span class="notification-icon"><img src="{{ url_for('static', filename='notification.png') }}" alt="Notification"></span></li>
+      <li><span class="settings-icon"><img src="{{ url_for('static', filename='settings.png') }}" alt="Setting"></span></li>
+      <li><div class="profile"><img src="{{ url_for('static', filename='globe1.png') }}" alt="Profile Picture" height="40px" width="40px" ></div></li>
+      <li><span class="profile-name">K.Austine</span></li>
+        <li><div class="dropdown"><button class="dropdown-toggle"><img src="{{ url_for('static', filename='dropdown.png') }}" alt="dropdown">
+        </button><div class="dropdown-menu"><a href="#">Profile</a><a href="#">Settings</a><a href="#">Logout</a></div></div></li>
+    </ul>
+  </div>
+</header>
+<section class="profile-section">
+  <!-- Profile section content -->
+  <div class="welcome-message">
+    <div class="profile-pic">
+      <img src="{{ url_for('static', filename='globe1.png') }}" height="40px" width="40px" alt="Profile Picture">
+    </div>
+    <div class="greeting">
+      <p>Hello Austine!</p>
+      <p>We hope you're doing great today.</p>
+    </div>
+  </div>
+</section>
+</section>
+<div class="container">
+    <div class="row">
+      <!-- Single Empty Centered Column -->
+        <div class="container">
+            <div class="row">
+                <!-- Single Empty Centered Column -->
+                <div class="col-md-6 mx-auto">
+                    <h2 class="text-center">Attendance</h2>
+                </div>
+            </div>
+        </div>
+<tbody>
+    {% for student in students %}
+    <tr>
+        <td>
+            <div class="d-flex px-2 py-1">
+                <div>
+                    <img src="{{ student.profile_pic }}" class="avatar avatar-sm me-3">
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ student.name }}</h6>
+                    <p class="text-xs text-secondary mb-0">{{ student.email }}</p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <p class="text-xs font-weight-bold mb-0">{{ student.user_type }}</p>
+            <p class="text-xs text-secondary mb-0">{{ student.organization }}</p>
+        </td>
+        <td class="align-middle text-center text-sm">
+            {% if student.availability == 'Present' %}
+            <span class="badge badge-sm badge-success">{{ student.availability }}</span>
+            {% else %}
+            <span class="badge badge-sm badge-secondary">{{ student.availability }}</span>
+            {% endif %}
+        </td>
+        <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-normal">{{ student.date_registered }}</span>
+        </td>
+        <td class="align-middle">
+            <a href="javascript:;" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                Edit
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</div>
+  </div>
+</body>
+</html>

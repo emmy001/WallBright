@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WallBright Schools</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit-pro.min.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+<section class="bac">
+<header class="main-header">
+  <div class="logo">
+    <img src="{{ url_for('static', filename='globe1.png') }}" alt="Company Logo">
+  </div>
+  <h5>WALLBRIGHT SCHOOLS</h5>
+  <div class="company-info">
+    <ul class="nav-links">
+      <li><a href="{{ url_for('dashboard') }}">Overview</a></li>
+      <li><a href="{{ url_for('attendance') }}">Student's List</a></li>
+      <li><a href="{{ url_for('manage_attendance') }}">Manage Attendance</a></li>
+      <li>
+        <div class="search-bar"><input type="text" placeholder="Search..."></div>
+      </li>
+      <li><span class="notification-icon"><img src="{{ url_for('static', filename='notification.png') }}" alt="Notification"></span></li>
+      <li><span class="settings-icon"><img src="{{ url_for('static', filename='settings.png') }}" alt="Setting"></span></li>
+      <li>
+        <div class="profile"><img src="{{ url_for('static', filename='globe1.png') }}" alt="Profile Picture" height="40px" width="40px"></div>
+      </li>
+      <li><span class="profile-name">{{ user_data['username'] }}</span></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropdown-toggle">
+            <img src="{{ url_for('static', filename='dropdown.png') }}" alt="dropdown">
+          </button>
+          <div class="dropdown-menu">
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</header>
+<section class="profile-section">
+  <div class="welcome-message">
+    <div class="profile-pic">
+      <img src="{{ url_for('static', filename='globe1.png') }}" height="40px" width="40px" alt="Profile Picture">
+    </div>
+    <div class="greeting">
+      <p>Hello {{ user_data['username'] }}!</p>
+      <p>We hope you're doing great today.</p>
+    </div>
+  </div>
+</section>
+</section>
+<section class="attendance-summary">
+  <div class="attendance-container present">
+    <i class="fas fa-user-check"></i>
+    <p class="label">Present</p>
+    <p class="count">8</p>
+  </div>
+  <div class="attendance-container absent">
+    <i class="fas fa-user-times"></i>
+    <p class="label">Absent</p>
+    <p class="count">1</p>
+  </div>
+  <div class="attendance-container late">
+    <i class="fas fa-user-clock"></i>
+    <p class="label">Late</p>
+    <p class="count">3</p>
+  </div>
+  <div class="attendance-container total">
+    <i class="fas fa-users"></i>
+    <p class="label">Total</p>
+    <p class="count">{{ num_students }}</p>
+  </div>
+</section>
+<section class="two-column-section">
+  <div class="column wider">
+    <h4>Total Attendance Report</h4>
+    <div class="bar-graph">
+      <canvas id="attendance-chart" width="485" height="280"></canvas>
+    </div>
+  </div>
+  <div class="column">
+    <h4>Students by Class</h4>
+    <div class="pie-chart">
+      <canvas id="pie" width="485" height="280"></canvas>
+    </div>
+  </div>
+</section>
+
+<section class="three-column-section">
+  <div class="column">
+    <h4>Students By Gender</h4>
+    <div class="v469_1073 bubble male">
+      <span class="percentage">60%</span>
+    </div>
+    <div class="v469_1074 bubble female">
+      <span class="percentage">80%</span>
+    </div>
+  </div>
+  <div class="column">
+    <h4>Top 10 Attendance</h4>
+    <div class="card" width="485" height="280">
+      <div class="table-responsive">
+        <table id="attendance-table" class="table align-items-center mb-0">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UserType</th>
+              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Classes and Attendance</th>
+              <th class="text-secondary opacity-7"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table content goes here -->
+           {% for student in students.values() %}
+                        <tr>
+                            <td>{{ student[0] }}</td>
+                            <td>{{ student[1] }}</td>
+                            <td>{{ student[2] }}</td>
+                            <td>
+                                {% for class_, attendance in student[3].items() %}
+                                    {{ class_ }}: {{ attendance }}<br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <h4>Weekly Absent</h4>
+    <div class="weekly-absent-chart">
+      <canvas id="radarChart" width="485" height="280"></canvas>
+    </div>
+  </div>
+</section>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDdL99XWn7dE4eYCm8GMxYcxuaA3Jm4dUo",
+    authDomain: "smartattendance-cb35b.firebaseapp.com",
+    databaseURL: "https://smartattendance-cb35b-default-rtdb.firebaseio.com",
+    projectId: "smartattendance-cb35b",
+    storageBucket: "smartattendance-cb35b.appspot.com",
+    messagingSenderId: "203482295003",
+    appId: "1:203482295003:web:bea6ad1b84a52645467afe",
+    measurementId: "G-4JH9DDMNSF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<script type="module" src="{{ url_for('static', filename='js/script1.js') }}"></script>
+</body>
+</html>

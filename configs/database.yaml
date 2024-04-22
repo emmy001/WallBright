@@ -1,0 +1,6 @@
+teacher:
+  password_hash: <enter-your-teacher-login-hash>
+firebase:
+  databaseURL: "https://smartattendance-cb35b-default-rtdb.firebaseio.com/"
+  storageBucket: "smartattendance-cb35b.appspot.com"
+  pathToServiceAccount: "/Users/HP/Desktop/Proj/shape/smartattendance-cb35b-firebase-adminsdk-f9l8c-9b40b1226c.json"

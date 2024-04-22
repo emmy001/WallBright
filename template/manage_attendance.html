@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WallBright Facial Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='material-kit-pro.min.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<section class="bac">
+<header class="main-header">
+  <div class="logo">
+    <img src="{{ url_for('static', filename='globe1.png') }}" alt="Company Logo">
+
+  </div>
+    <h4>WALLBRIGHT SCHOOLS</h4>
+  <div class="company-info">
+    <ul class="nav-links">
+        <li><a href="{{ url_for('dashboard') }}">Overview</a></li>
+        <li><a href="{{ url_for('attendance') }}">Student's List</a></li>
+        <li><a href="{{ url_for('manage_attendance') }}">Manage Attendance</a></li>
+      <li><div class="search-bar"><input type="text" placeholder="Search..."></div></li>
+      <li><span class="notification-icon"><img src="{{ url_for('static', filename='notification.png') }}" alt="Notification"></span></li>
+      <li><span class="settings-icon"><img src="{{ url_for('static', filename='settings.png') }}" alt="Setting"></span></li>
+      <li><div class="profile"><img src="{{ url_for('static', filename='globe1.png') }}" alt="Profile Picture" height="40px" width="40px" ></div></li>
+      <li><span class="profile-name">{{ user_data['username'] }}</span></li>
+        <li><div class="dropdown"><button class="dropdown-toggle"><img src="{{ url_for('static', filename='dropdown.png') }}" alt="dropdown">
+        </button><div class="dropdown-menu"><a href="#">Profile</a><a href="#">Settings</a><a href="#">Logout</a></div></div></li>
+    </ul>
+  </div>
+</header>
+<section class="profile-section">
+  <!-- Profile section content -->
+  <div class="welcome-message">
+    <div class="profile-pic">
+      <img src="{{ url_for('static', filename='globe1.png') }}" height="40px" width="40px" alt="Profile Picture">
+    </div>
+    <div class="greeting">
+      <p>Hello {{ user_data['username'] }}!</p>
+      <p>We hope you're doing great today.</p>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- Registration section -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="accordion" id="registrationAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="registrationHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#registrationCollapse" aria-expanded="true" aria-controls="registrationCollapse">
+                            New Registration
+                        </button>
+                    </h2>
+                    <div id="registrationCollapse" class="accordion-collapse collapse" aria-labelledby="registrationHeading" data-bs-parent="#registrationAccordion">
+                        <div class="accordion-body">
+                            <!-- Registration form content -->
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <img src="{{ url_for('static', filename='manage.png') }}" alt="mainimage">
+                                  </div>
+                                  <!-- Second Column with Content -->
+                                  <div class="col-md-8">
+                                    <h2>Capture a new face from Camera</h2>
+                                    <p>NOTE: This will only work if you are not in our database</p>
+                                    <button id="capture-button" class="btn btn-primary">Capture</button>
+                                    <div class="video-container">
+                                        <iframe id="video" src="/video_feed" style="width: 100%; height: 400px;"></iframe>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 mx-auto text-center">
+                                        <h1>Or</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                      <p>
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            Upload Your Image
+                                        </button>
+                                      </p>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="container mt-5">
+                                                    <h2 class="mb-4">Select The Image to Upload</h2>
+                                                        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+                                                            <div class="mb-3">
+                                                                <label for="image" class="form-label">Choose Image</label>
+                                                                <input type="file" class="form-control" id="file" name="file" accept="image/*">
+                                                                <label for="image" class="btn btn-primary">
+                                                                    <input type="submit" id="image" name="image" value="Upload" accept="image/*" style="display: none;">
+                                                                    Upload
+                                                                </label>
+                                                            </div>
+                                                        </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Take Attendance section -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="accordion" id="takeAttendanceAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="takeAttendanceHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#takeAttendanceCollapse" aria-expanded="true" aria-controls="takeAttendanceCollapse">
+                            Take Attendance
+                        </button>
+                    </h2>
+                    <div id="takeAttendanceCollapse" class="accordion-collapse collapse" aria-labelledby="takeAttendanceHeading" data-bs-parent="#takeAttendanceAccordion">
+                        <div class="accordion-body">
+                            <!-- Take Attendance content -->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img src="{{ url_for('static', filename='manage.png') }}" alt="mainimage">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="video-container">
+                                             <iframe id="video" src="/video_feed" style="width: 100%; height: 400px;"></iframe>
+                                         </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-md-6 mx-auto text-center">
+                                        <button id="recognize-button" class="btn btn-primary">Take Attendance</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('recognize-button').addEventListener('click', function() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/recognize', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Redirect to the select class page
+          window.location.href = '/select_class';
+        }
+      };
+      xhr.send();
+    });
+
+
+    document.getElementById('capture-button').addEventListener('click', function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/capture', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Change the location of the window object to the success page
+                window.location.href = '/add_info';
+            }
+        };
+        xhr.send();
+    });
+
+    document.getElementById('upload-button').addEventListener('click', function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Change the location of the window object to the success page
+                window.location.href = '/select_class';
+            }
+        };
+        xhr.send();
+    });
+</script>
+
+
+<!-- Bootstrap 5 JavaScript files -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

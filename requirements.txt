@@ -1,0 +1,9 @@
+deepface
+dlib
+firebase_admin
+Flask
+numpy
+opencv_python
+Pillow
+scipy
+Werkzeug
